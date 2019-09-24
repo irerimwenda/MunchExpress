@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rules\RestorauntCategoryValidate;
 
 class MenuController extends Controller
 {
-    public function saveMenuItem(Request $request)
+    /* public function saveMenuItem(Request $request)
     {
         $postData = $this->validate($request, [
             'restoraunt_id' => 'required|numeric',
@@ -19,7 +20,7 @@ class MenuController extends Controller
         $category = Category::where('restoraunt_id', $postData['restoraunt_id'])->where('name', $postData['category'])->first();
 
         $menu = Menu::create([
-            'restaraunt_id' => $postData['restaraunt_id'],
+            'restoraunt_id' => $postData['restoraunt_id'],
             'category_id' => $category->id,
             'name' => $postData['item'],
             'description' => $postData['description'],
@@ -27,5 +28,19 @@ class MenuController extends Controller
         ]);
 
         return response()->json($menu, 201);
+    } */
+
+    public function saveMenuItem(Request $request) 
+    {
+        //return $request->all();
+
+        $postData = $this->validate($request, [
+            'restoraunt_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'item' => 'required',
+            'category' => ['required', new RestorauntCategoryValidate(request('restoraunt_id'))],
+        ]);
+
+        return $postData;
     }
 }
