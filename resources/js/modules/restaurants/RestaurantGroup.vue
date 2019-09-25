@@ -5,10 +5,14 @@
         <div class="col-md-4 mb-4" v-for="restaurant in localRestaurants" :key='restaurant.id'>
             <card-component>
                 <template slot="title">{{restaurant.name}}</template>
-                <template slot="body">{{restaurant.location}}</template>
+                <template slot="body">
+                    {{restaurant.location}}
+                    <br/>
+                    <a class="card-link" v-bind:href="restaurant.slug">Menu</a>
+                </template>
             </card-component>
         </div>
-
+ 
         <div class="col-md-4" v-if="showAddForm">
             <card-component>
                 <template slot="title">Add New Restaurant</template>
