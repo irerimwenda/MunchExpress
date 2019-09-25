@@ -2,7 +2,7 @@
 
 <div class="resto-group__wrapper mb-5">
     <div class="row">
-        <div class="col-md-4 mb-4" v-for="restaurant in restaurants" :key='restaurant.id'>
+        <div class="col-md-4 mb-4" v-for="restaurant in localRestaurants" :key='restaurant.id'>
             <card-component>
                 <template slot="title">{{restaurant.name}}</template>
                 <template slot="body">{{restaurant.location}}</template>
@@ -17,7 +17,7 @@
                 </template>
             </card-component>
 
-            <modal name="add-new-restaurant" height="55%">
+            <modal name="add-new-restaurant" height="55%" draggable="true">
                 <div class="container-padding">
 
                     <RestaurantAddForm 
@@ -35,6 +35,7 @@
 
 <script>
 import RestaurantAddForm from './RestaurantAddForm';
+import axios from 'axios';
 
 export default {
     components: {
@@ -43,14 +44,17 @@ export default {
     props: ['restaurants'],
     created() {
         console.log('this.restaurants.length', this.restaurants.length);
+        this.localRestaurants = this.restaurants;
     },
     computed: {
         showAddForm() {
-            return (this.restaurants.length < 5) ? true : false;
+            return (this.localRestaurants.length < 5) ? true : false;
         }
     },
     data() {
-        return {}
+        return {
+            localRestaurants: []
+        }
     },
     methods: {
         handleAddNewRestaurant() {
@@ -60,6 +64,12 @@ export default {
             this.$modal.hide('add-new-restaurant');
         },
         handleSaveRestaurant(restaurantData) {
+            console.log('restaurantData', restaurantData);
+            axios.post('/api/restaurant', restaurantData).then(response => {
+                console.log('response', response.data);
+                this.localRestaurants.unshift(response.data);
+            this.$modal.hide('add-new-restaurant');
+            });
         }
     }
 }

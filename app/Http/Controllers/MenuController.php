@@ -5,32 +5,56 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Rules\RestorauntCategoryValidate;
 
+use App\Models\Menu;
+use App\Models\Category;
+use App\Services\MenuService;
+
 class MenuController extends Controller
 {
-    /* public function saveMenuItem(Request $request)
+
+    //Index
+    public function index($id)
+    {
+        $restoraunt_id = $id;
+        $service = new MenuService;
+        $menus = $service->getMenuWithCategory($restoraunt_id);
+
+        return view('menu.menu-index', compact('menus', 'restoraunt_id'));
+    }
+
+
+    public function saveMenuItem(Request $request)
     {
         $postData = $this->validate($request, [
             'restoraunt_id' => 'required|numeric',
             'price' => 'required|numeric',
             'item' => 'required',
             'description' => 'required|min:3',
-            'category' => ['required', new RestoCategoryValidate(request('restoraunt_id'))],
+            //'category' => ['required', new RestorauntCategoryValidate(request('restoraunt_id'))],
+            'category' => 'required',
         ]);
 
-        $category = Category::where('restoraunt_id', $postData['restoraunt_id'])->where('name', $postData['category'])->first();
-
-        $menu = Menu::create([
+        $conditions = [
             'restoraunt_id' => $postData['restoraunt_id'],
-            'category_id' => $category->id,
+            'name' => $postData['category'],
+        ];
+
+        $category = Category::where($conditions)->first();
+        //$category = Category::where('restoraunt_id', $postData['restoraunt_id'])->where('name', $postData['category'])->first();
+
+        $menu = $category->menus()->create([
+        //$menu = Menu::create([
+            'restoraunt_id' => $postData['restoraunt_id'],
+            //'category_id' => $category->id,
             'name' => $postData['item'],
             'description' => $postData['description'],
             'price' => $postData['price'],
         ]);
 
         return response()->json($menu, 201);
-    } */
+    }
 
-    public function saveMenuItem(Request $request) 
+    /* public function saveMenuItem(Request $request) 
     {
         //return $request->all();
 
@@ -42,5 +66,5 @@ class MenuController extends Controller
         ]);
 
         return $postData;
-    }
+    } */
 }

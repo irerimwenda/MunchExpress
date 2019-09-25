@@ -1949,7 +1949,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log('form data', this.food);
       var postData = this.food;
       postData.restoraunt_id = this.restoraunt_id;
-      window.axios.post('api/item/save', postData).then(function (response) {
+      window.axios.post('/api/item/save', postData).then(function (response) {
         console.log('response', response.data);
 
         _this.$emit('newMenuItemAdded', response.data, postData.category);
@@ -2157,7 +2157,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/* import axios from 'axios'; */
 /* harmony default export */ __webpack_exports__["default"] = ({
+  /* created() {
+      axios.get('/api/user')
+      .then(response => {
+          console.log(response.data);
+      });
+  }, */
   data: function data() {
     return {
       restaurant: this.basicResto()
@@ -2167,7 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
     basicResto: function basicResto() {
       return {
         name: "",
-        address: "",
+        location: "",
         tables: 0
       };
     },
@@ -2193,6 +2201,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RestaurantAddForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RestaurantAddForm */ "./resources/js/modules/restaurants/RestaurantAddForm.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2229,6 +2239,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     RestaurantAddForm: _RestaurantAddForm__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -2236,14 +2247,17 @@ __webpack_require__.r(__webpack_exports__);
   props: ['restaurants'],
   created: function created() {
     console.log('this.restaurants.length', this.restaurants.length);
+    this.localRestaurants = this.restaurants;
   },
   computed: {
     showAddForm: function showAddForm() {
-      return this.restaurants.length < 5 ? true : false;
+      return this.localRestaurants.length < 5 ? true : false;
     }
   },
   data: function data() {
-    return {};
+    return {
+      localRestaurants: []
+    };
   },
   methods: {
     handleAddNewRestaurant: function handleAddNewRestaurant() {
@@ -2252,7 +2266,18 @@ __webpack_require__.r(__webpack_exports__);
     handleCancelRestaurant: function handleCancelRestaurant() {
       this.$modal.hide('add-new-restaurant');
     },
-    handleSaveRestaurant: function handleSaveRestaurant(restaurantData) {}
+    handleSaveRestaurant: function handleSaveRestaurant(restaurantData) {
+      var _this = this;
+
+      console.log('restaurantData', restaurantData);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/restaurant', restaurantData).then(function (response) {
+        console.log('response', response.data);
+
+        _this.localRestaurants.unshift(response.data);
+
+        _this.$modal.hide('add-new-restaurant');
+      });
+    }
   }
 });
 
@@ -38578,23 +38603,23 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.restaurant.address,
-            expression: "restaurant.address"
+            value: _vm.restaurant.location,
+            expression: "restaurant.location"
           }
         ],
         staticClass: "form-control",
         attrs: {
           type: "text",
-          name: "address",
+          name: "location",
           placeholder: "Enter Restaurant Address"
         },
-        domProps: { value: _vm.restaurant.address },
+        domProps: { value: _vm.restaurant.location },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.restaurant, "address", $event.target.value)
+            _vm.$set(_vm.restaurant, "location", $event.target.value)
           }
         }
       })
@@ -38670,7 +38695,7 @@ var render = function() {
       "div",
       { staticClass: "row" },
       [
-        _vm._l(_vm.restaurants, function(restaurant) {
+        _vm._l(_vm.localRestaurants, function(restaurant) {
           return _c(
             "div",
             { key: restaurant.id, staticClass: "col-md-4 mb-4" },
@@ -38718,7 +38743,13 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "modal",
-                  { attrs: { name: "add-new-restaurant", height: "55%" } },
+                  {
+                    attrs: {
+                      name: "add-new-restaurant",
+                      height: "55%",
+                      draggable: "true"
+                    }
+                  },
                   [
                     _c(
                       "div",
@@ -50937,8 +50968,8 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -50950,7 +50981,7 @@ __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css */ "./node_
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_1___default.a);
+Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

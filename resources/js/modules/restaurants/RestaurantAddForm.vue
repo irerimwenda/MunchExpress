@@ -15,8 +15,8 @@
         <label for="name">Address</label>
         <input type="text"
         class="form-control"
-        name="address"
-        v-model="restaurant.address"
+        name="location"
+        v-model="restaurant.location"
         placeholder="Enter Restaurant Address">
     </div>
 
@@ -36,7 +36,15 @@
 </template>
 
 <script>
+/* import axios from 'axios'; */
+
 export default {
+    /* created() {
+        axios.get('/api/user')
+        .then(response => {
+            console.log(response.data);
+        });
+    }, */
     data() {
         return {
             restaurant: this.basicResto()
@@ -44,7 +52,7 @@ export default {
     },
     methods: {
         basicResto() {
-            return { name: "", address: "", tables: 0 }
+            return { name: "", location: "", tables: 0 }
         },
         handleAddButton() {
             this.$emit('addRestaurantEvent', this.restaurant);

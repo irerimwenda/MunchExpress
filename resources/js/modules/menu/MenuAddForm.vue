@@ -83,7 +83,7 @@ export default {
 
             let postData = this.food;
             postData.restoraunt_id = this.restoraunt_id;
-            window.axios.post('api/item/save', postData).then(response => {
+            window.axios.post('/api/item/save', postData).then(response => {
                 console.log('response', response.data);
                 this.$emit('newMenuItemAdded', response.data, postData.category);
                 this.food = this.emptyFoodItem();
