@@ -10658,3 +10658,8 @@ a.text-dark:focus {
   padding: 10px;
 }
 
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+

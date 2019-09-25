@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "739b5863589e63af27a99452dbc7dfbc",
+    "content-hash": "d418eeacedf35f37eddd29db0da89f47",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -3738,6 +3738,55 @@
                 "environment"
             ],
             "time": "2019-09-10T21:37:39+00:00"
+        },
+        {
+            "name": "ybr-nx/laravel-mariadb",
+            "version": "1.0.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ybr-nx/laravel-mariadb.git",
+                "reference": "1dd893432237e28d5d43d1de110be925602dd37d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ybr-nx/laravel-mariadb/zipball/1dd893432237e28d5d43d1de110be925602dd37d",
+                "reference": "1dd893432237e28d5d43d1de110be925602dd37d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "YbrNX\\MariaDB\\MariaDBServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "YbrNX\\MariaDB\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "EUPL-1.2"
+            ],
+            "authors": [
+                {
+                    "name": "Ingmar Aasoja",
+                    "email": "ingmar@aasoja.ee"
+                }
+            ],
+            "description": "Add MariaDB JSON select support to Laravel",
+            "keywords": [
+                "database",
+                "json",
+                "laravel",
+                "mariadb"
+            ],
+            "time": "2019-09-11T05:18:47+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

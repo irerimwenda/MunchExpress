@@ -2242,6 +2242,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38732,9 +38735,18 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("template", { slot: "body" }, [
+                    _c("i", { staticClass: "fa fa-map-marker" }),
                     _vm._v(
-                      "\r\n                    " +
+                      " " +
                         _vm._s(restaurant.location) +
+                        "\r\n                    "
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fa fa-table" }),
+                    _vm._v(
+                      " " +
+                        _vm._s(restaurant.tables) +
                         "\r\n                    "
                     ),
                     _c("br"),
@@ -38742,10 +38754,19 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        directives: [{ name: "binhref", rawName: "v-binhref" }],
-                        staticClass: "card-link"
+                        staticClass: "card-link",
+                        attrs: { href: restaurant.slug }
                       },
                       [_vm._v("Menu")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "card-link",
+                        attrs: { href: restaurant.ordersSlug }
+                      },
+                      [_vm._v("Orders")]
                     )
                   ])
                 ],
@@ -38770,9 +38791,13 @@ var render = function() {
                     _vm._v(" "),
                     _c("template", { slot: "body" }, [
                       _c(
-                        "span",
-                        { on: { click: _vm.handleAddNewRestaurant } },
-                        [_vm._v("+")]
+                        "button",
+                        {
+                          staticClass: "btn btn-info",
+                          staticStyle: { color: "white" },
+                          on: { click: _vm.handleAddNewRestaurant }
+                        },
+                        [_vm._v("+ Add")]
                       )
                     ])
                   ],
