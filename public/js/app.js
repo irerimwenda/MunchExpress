@@ -2393,9 +2393,12 @@ __webpack_require__.r(__webpack_exports__);
         orderedItemsIds.push(item.id);
       });
       var orderData = {
-        customerDetails: this.customerDetails,
-        finalAmount: this.finalAmount,
-        orderDetails: orderedItemsIds
+        restaurant_id: this.restaurant_id,
+        order_data: {
+          customerDetails: this.customerDetails,
+          finalAmount: this.finalAmount,
+          orderDetails: orderedItemsIds
+        }
       };
       console.log(orderData);
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/order/save', orderData).then(function (response) {

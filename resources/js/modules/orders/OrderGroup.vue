@@ -100,9 +100,12 @@ export default {
             });
 
             let orderData = {
-                customerDetails: this.customerDetails,
-                finalAmount: this.finalAmount,
-                orderDetails: orderedItemsIds
+                restaurant_id: this.restaurant_id,
+                order_data: {
+                    customerDetails: this.customerDetails,
+                    finalAmount: this.finalAmount,
+                    orderDetails: orderedItemsIds
+                }
             };
 
             console.log(orderData);
