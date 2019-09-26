@@ -35,12 +35,15 @@ Vue.component('card-component', require('./components/Card.vue').default);
 //Module Components
 Vue.component('menu-container', require('./modules/menu/MenuContainer.vue').default);
 Vue.component('restaurant-group', require('./modules/restaurants/RestaurantGroup.vue').default);
+Vue.component('order-group', require('./modules/orders/OrderGroup.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+ window.eventBus = new Vue({});
 
 document.addEventListener('turbolinks:load', () => {
     var element = document.getElementById("app");

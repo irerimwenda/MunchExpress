@@ -5,7 +5,14 @@
 
     <div class="row mb-3">
         <div class="col-md-12">
-            <h3>Manage Orders for {{$restaurant->name}}</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Manage Orders for {{$restaurant->name}}</h3>
+                </div>
+                <div class="col-md-6">      
+                    <a style="color:white" class="btn btn-sm btn-info" href="{{route('restaurants.orders.add', $restaurant->id)}}">Add Order</a>
+                </div>
+            </div>
         </div>
     </div>
 

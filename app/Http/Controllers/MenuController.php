@@ -67,4 +67,18 @@ class MenuController extends Controller
 
         return $postData;
     } */
+
+    public function getRestaurantMenu(Request $request) 
+    {
+        $this->validate($request, [
+            //'restaurant_id' => 'required|exists:restaurants, id'
+            'restaurant_id' => 'required'
+        ]);
+
+        $menuItems = Menu::where('restoraunt_id', $request->input('restaurant_id'))
+        ->orderBy('category_id')
+        ->get();
+
+        return response()->json($menuItems, 200);
+    }
 }
