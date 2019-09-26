@@ -1,9 +1,17 @@
 <template>
-    <div class="row">
+    <div>
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <button @click="handleOrderSave" class="btn btn-success float-right">Save</button>
+            </div>
+        </div>
+        <div class="row">
         <div class="col-md-7">
             <div class="mb-5">
                 <h3>Customer Details</h3>
-                <order-form></order-form>
+                <order-form 
+                @customerDetailsChanged="handleCustomerDetails">
+                </order-form>
             </div>
 
             <div class="mb-5">
@@ -21,6 +29,7 @@
             @menuItemAdded="handleNewMenuItem">
             </order-menu-items>
         </div>
+    </div>
     </div>
 </template>
 
@@ -55,7 +64,8 @@ export default {
         return {
             menuItems: [],
             orderDetails: [],
-            originalMenuItems: []
+            originalMenuItems: [],
+            customerDetails: null
         }
     }, 
     methods: {
@@ -77,6 +87,26 @@ export default {
         },
         handleClearedFilteredList() {
             this.menuItems = this.originalMenuItems;
+        },
+        handleCustomerDetails(customer) {
+            console.log('customer', customer); 
+            this.customerDetails = customer;
+        },
+        handleOrderSave() {
+            let orderedItemsIds = [];
+
+            this.orderDetails.forEach(item => {
+                orderedItemsIds.push(item.id);
+            });
+
+            let orderData = {
+                customerDetails: this.customerDetails,
+                finalAmount: this.finalAmount,
+                orderDetails: orderedItemsIds
+            };
+
+            console.log(orderData);
+            axios.post('/api/order/save', orderData).then(response => console.log('response', response))
         }
     }
     

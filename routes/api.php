@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:api']], function() {
     Route::post('/restaurant', 'RestaurantController@store');
     Route::post('/restaurant/menu', 'MenuController@getRestaurantMenu');
+    Route::post('/order/save', 'RestaurantOrderController@store');
 });
 
 Route::post('/item/save', 'MenuController@saveMenuItem');

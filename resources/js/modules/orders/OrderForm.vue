@@ -3,17 +3,17 @@
         <form action="">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" v-bind="customer.name">
+                <input type="text" class="form-control" v-model="customer.name">
             </div>
 
             <div class="form-group">
                 <label for="name">Phone</label>
-                <input type="text" class="form-control" v-bind="customer.phone">
+                <input type="text" class="form-control" v-model="customer.phone">
             </div>
 
             <div class="form-group">
                 <label for="name">Address</label>
-                <input type="text" class="form-control" v-bind="customer.address">
+                <input type="text" class="form-control" v-model="customer.address">
             </div>
         </form>
     </div>
@@ -28,6 +28,19 @@
                     phone: '',
                     address: ''
                 }
+            }
+        },
+        watch: {
+            customer: {
+                handler(value) {
+                    //console.log('value', value)
+                    let customer = {
+                        name: value.name,
+                        phone: value.phone,
+                        address: value.address,
+                    }
+                    this.$emit('customerDetailsChanged', customer);
+                }, deep:true
             }
         }
 
