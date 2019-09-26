@@ -38,6 +38,8 @@ export default {
     created() {
         this.loadRestaurantMenuItems();
         window.eventBus.$on('menuItemAdded', this.handleNewMenuItem);
+        window.eventBus.$on('filteredList', this.handleFilteredList);
+        window.eventBus.$on('clearFilteredList', this.handleClearedFilteredList);
     },
     computed: {
         finalAmount() {
@@ -52,18 +54,29 @@ export default {
     data () {
         return {
             menuItems: [],
-            orderDetails: []
+            orderDetails: [],
+            originalMenuItems: []
         }
     }, 
     methods: {
         loadRestaurantMenuItems() {
             let postData = {restaurant_id: this.restaurant_id}
             axios.post('/api/restaurant/menu', postData)
-            .then(response => console.log('response', this.menuItems = response.data))
+            .then(response => {
+                //console.log('response', this.menuItems = response.data)
+                this.menuItems = response.data
+                this.originalMenuItems = response.data
+            })
             .catch(error => console.error(error.response))
         },
         handleNewMenuItem(item) {
             this.orderDetails.unshift(item);
+        }, 
+        handleFilteredList(filteredList) {
+            this.menuItems = filteredList;
+        },
+        handleClearedFilteredList() {
+            this.menuItems = this.originalMenuItems;
         }
     }
     

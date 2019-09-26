@@ -20,16 +20,16 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            customer: {
-                name: '',
-                phone: '',
-                address: ''
+    export default {
+        data() {
+            return {
+                customer: {
+                    name: '',
+                    phone: '',
+                    address: ''
+                }
             }
         }
+
     }
-    
-}
 </script>

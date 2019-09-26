@@ -1,15 +1,17 @@
 <template>
     <div class="wrapper">
+        <menu-search :items="items"></menu-search>
         <menu-items :items="items"></menu-items>
     </div>
 </template> 
 
 <script>
 import MenuItems from './MenuItems.vue';
+import MenuSearch from './MenuSearch.vue';
 
 export default {
      components: {
-         MenuItems
+         MenuItems, MenuSearch
      },
      props: ['items']
 }
