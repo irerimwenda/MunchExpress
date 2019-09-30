@@ -10663,3 +10663,7 @@ a.text-dark:focus {
   text-align: center;
 }
 
+.pointer {
+  cursor: pointer;
+}
+

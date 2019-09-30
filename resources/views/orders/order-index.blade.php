@@ -19,7 +19,9 @@
     <div class="row">
             <div class="col-md-12">
                 @if($orders->count() > 0)
-                <table class="table table-hover table-bordered table-striped">
+
+                <manage-orders :orders="{{ json_encode($orders) }}"></manage-orders>
+                <!-- <table class="table table-hover table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Order Id</th>
@@ -45,7 +47,7 @@
                             </tr>
                         @endforeach()
                     </tbody>
-                </table>
+                </table> -->
 
                 <div class="col-md-2 mx-auto">
                     <div class="center" style="text-align:center">

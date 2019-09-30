@@ -49,6 +49,7 @@ export default {
         window.eventBus.$on('menuItemAdded', this.handleNewMenuItem);
         window.eventBus.$on('filteredList', this.handleFilteredList);
         window.eventBus.$on('clearFilteredList', this.handleClearedFilteredList);
+        window.eventBus.$on('removeOrderedItem', this.handleRemoveOrderedItem);
     },
     computed: {
         finalAmount() {
@@ -60,7 +61,7 @@ export default {
             return price;
         }
     },
-    data () {
+    data() {
         return {
             menuItems: [],
             orderDetails: [],
@@ -91,6 +92,9 @@ export default {
         handleCustomerDetails(customer) {
             console.log('customer', customer); 
             this.customerDetails = customer;
+        },
+        handleRemoveOrderedItem(item) {
+            this.orderDetails = this.orderDetails.filter(orderDetail => orderDetail.id != item.id);
         },
         handleOrderSave() {
             let orderedItemsIds = [];

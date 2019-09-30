@@ -36,6 +36,7 @@ Vue.component('card-component', require('./components/Card.vue').default);
 Vue.component('menu-container', require('./modules/menu/MenuContainer.vue').default);
 Vue.component('restaurant-group', require('./modules/restaurants/RestaurantGroup.vue').default);
 Vue.component('order-group', require('./modules/orders/OrderGroup.vue').default);
+Vue.component('manage-orders', require('./modules/orders/ManageOrders.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
